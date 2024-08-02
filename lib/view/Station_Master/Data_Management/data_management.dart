@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:temskishore/Utils/string.dart';
-import 'package:temskishore/controller/Drawer_Controller/drawer_controller.dart';
 
+import '../../../Utils/string.dart';
 import '../../../Widgets/Appbar/appbar.dart';
 import '../../../Widgets/Left_drawer/drawer_left.dart';
 import '../../../Widgets/Right_drawer/Widget/float_button.dart';
+import '../../../controller/Drawer_Controller/drawer_controller.dart';
 import '../../Homepage/homepage.dart';
 import 'Widgets/Tabs/data_qa.dart';
 import 'Widgets/Tabs/dataupload.dart';

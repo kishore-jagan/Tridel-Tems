@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:temskishore/view/Admin_Center/Notification_Settings/Widgets/notification_settings_drop.dart';
-import 'package:temskishore/view/Admin_Center/Notification_Settings/Widgets/notification_settings_text.dart';
 
 import '../../../Widgets/Appbar/appbar.dart';
 import '../../../Widgets/Left_drawer/drawer_left.dart';
 import '../../Homepage/homepage.dart';
+import 'Widgets/notification_settings_drop.dart';
+import 'Widgets/notification_settings_text.dart';
 
 class NotificationSettingsPage extends StatefulWidget {
   const NotificationSettingsPage({super.key});

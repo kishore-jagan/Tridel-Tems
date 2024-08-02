@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../Api Services/getStationSensors_Ids_service.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -9,6 +11,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,7 +105,8 @@ class _LoginPageState extends State<LoginPage> {
                                   borderRadius: const BorderRadius.all(
                                       Radius.circular(10)),
                                   color: Colors.grey.withOpacity(0.3)),
-                              child: const TextField(
+                              child: TextField(
+                                controller: _usernameController,
                                 decoration: InputDecoration(
                                   prefixIcon: Icon(Icons.person_2_outlined),
                                   label: Text('Username'),
@@ -118,7 +124,8 @@ class _LoginPageState extends State<LoginPage> {
                                   borderRadius: const BorderRadius.all(
                                       Radius.circular(10)),
                                   color: Colors.grey.withOpacity(0.3)),
-                              child: const TextField(
+                              child: TextField(
+                                controller: _passwordController,
                                 decoration: InputDecoration(
                                   prefixIcon: Icon(Icons.lock_open),
                                   label: Text('Password'),
@@ -131,8 +138,12 @@ class _LoginPageState extends State<LoginPage> {
                             height: 15,
                           ),
                           InkWell(
-                            onTap: () {
-                              Get.toNamed('/homePage');
+                            onTap: () async {
+                              // LoginService().login(_usernameController.text,
+                              //     _passwordController.text);
+                              await GetSensorsByStationIdsService()
+                                  .getAllSensorsByStation();
+                              Get.toNamed('/home');
                             },
                             child: Container(
                               height: 50,

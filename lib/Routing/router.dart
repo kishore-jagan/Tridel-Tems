@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:temskishore/Routing/routes.dart';
-import 'package:temskishore/view/Authentication/authentication.dart';
-import 'package:temskishore/view/Homepage/homepage.dart';
+
+import '../view/Authentication/authentication.dart';
+import '../view/Homepage/homepage.dart';
+import 'routes.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {

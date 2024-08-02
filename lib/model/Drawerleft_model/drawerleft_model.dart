@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:temskishore/view/Admin_Center/Notification_Settings/notification_settings.dart';
-import 'package:temskishore/view/Admin_Center/User_Action_Log/user_action_log.dart';
-import 'package:temskishore/view/Admin_Center/User_Management/settings.dart';
-import 'package:temskishore/view/Station_Master/Maintenance_Manager/Maintenance_Dashboard/maintenance_dashboard.dart';
 
+import '../../view/Admin_Center/Notification_Settings/notification_settings.dart';
+import '../../view/Admin_Center/User_Action_Log/user_action_log.dart';
+import '../../view/Admin_Center/User_Management/settings.dart';
 import '../../view/Station_Master/Communication_Center/communication_center.dart';
 import '../../view/Station_Master/Configurations/configuration.dart';
 import '../../view/Station_Master/Data_Management/data_management.dart';
+import '../../view/Station_Master/Maintenance_Manager/Maintenance_Dashboard/maintenance_dashboard.dart';
 import '../../view/Station_Master/Maintenance_Manager/Maintenance_Settings/maintenance_settings.dart';
 import '../../view/Station_Master/Station_Management/station_management.dart';
 

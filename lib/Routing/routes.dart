@@ -1,2 +1,2 @@
-const homePageRoute = '/homePage';
+const homePageRoute = '/home';
 const authenticationPageRoute = '/auth';

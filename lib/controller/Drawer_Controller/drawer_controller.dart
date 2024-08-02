@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:temskishore/Utils/string.dart';
-import 'package:temskishore/Widgets/Right_drawer/dashboard_drawer.dart';
-import 'package:temskishore/Widgets/Right_drawer/dataqa_filter_drawer.dart';
-import 'package:temskishore/Widgets/Right_drawer/dataqa_upload_drawer.dart';
-import 'package:temskishore/Widgets/Right_drawer/dataupload_download_drawer.dart';
-import 'package:temskishore/Widgets/Right_drawer/dataupload_upload_drawer.dart';
-import 'package:temskishore/Widgets/Right_drawer/drawer_right.dart';
-import 'package:temskishore/Widgets/Right_drawer/report_drawer.dart';
-import 'package:temskishore/Widgets/Right_drawer/statistics_drawer.dart';
+
+import '../../Utils/string.dart';
+import '../../Widgets/Right_drawer/dashboard_drawer.dart';
+import '../../Widgets/Right_drawer/dataqa_filter_drawer.dart';
+import '../../Widgets/Right_drawer/dataqa_upload_drawer.dart';
+import '../../Widgets/Right_drawer/dataupload_download_drawer.dart';
+import '../../Widgets/Right_drawer/dataupload_upload_drawer.dart';
+import '../../Widgets/Right_drawer/drawer_right.dart';
+import '../../Widgets/Right_drawer/report_drawer.dart';
+import '../../Widgets/Right_drawer/statistics_drawer.dart';
 
 class EndDrawerSelection extends StatefulWidget {
   const EndDrawerSelection({super.key});

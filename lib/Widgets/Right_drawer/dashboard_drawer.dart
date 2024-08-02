@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:multi_dropdown/multiselect_dropdown.dart';
-import 'package:temskishore/Widgets/Right_drawer/Widget/drawer_drop.dart';
-import 'package:temskishore/Widgets/Right_drawer/Widget/drawer_tick.dart';
+import '../../Api Services/getAllSensors_Params_service.dart';
+import '../../Api Services/getAllStations_service.dart';
+import '../../model/Api_models/getAllSensors_Params_model.dart';
+import 'Widget/drawer_drop.dart';
+import 'Widget/drawer_tick.dart';
 
 class DashboardFilterDrawer extends StatefulWidget {
   const DashboardFilterDrawer({super.key});
@@ -12,30 +15,66 @@ class DashboardFilterDrawer extends StatefulWidget {
 }
 
 class _DashboardFilterDrawerState extends State<DashboardFilterDrawer> {
-  final MultiSelectController _controller = MultiSelectController();
+  MultiSelectController _controller = MultiSelectController();
 
-  List<ValueItem> items = [
-    const ValueItem(label: 'WQ 1', value: '1'),
-    const ValueItem(label: 'WQ 2', value: '2'),
-  ];
+  List<ValueItem> _selectedStationName = [];
+  List<ValueItem> _listStationName = [];
 
-  final String _selectedParameterType = 'Water Quality';
-  final List<String> _listParameterType = ['Water Quality'];
-  final String _selectedParameter = 'Water Temprature';
-  final List<String> _listParameter = [
-    'Water Temprature',
-    'Specific Conductance',
-    'Salinity',
-    'pH',
-    'Dissolved Oxygen Saturation',
-    'Turbidity',
-    'Dissolved Oxygen',
-    'tds',
-    'Chlorophyll',
-    'Depth',
-    'Oxygen Reduction Potential',
-    'External Voltage'
-  ];
+  String _selectedSensorType = ' ';
+  List<String> _sensorTypes = [];
+  String _selectedParameter = '';
+  List<String> _listParameter = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchStations();
+    _fetchSensors();
+  }
+
+  _fetchStations() async {
+    try {
+      List<ValueItem> stations = await GetAllStationsService()
+          .getAllStations()
+          .then((stations) => stations
+              .map((station) => ValueItem(
+                    label: station.stationName,
+                    value: station.stationId.toString(),
+                  ))
+              .toList());
+
+      // Populate items with fetched stations
+      setState(() {
+        _listStationName = stations;
+        if (_listStationName.isNotEmpty) {
+          _selectedStationName = [_listStationName.first];
+        }
+      });
+    } catch (e) {
+      print('Error fetching stations: $e');
+    }
+  }
+
+  _fetchSensors() async {
+    try {
+      List<Sensor> sensors = await GetAllSensorsService().getAllSensors();
+
+      setState(() {
+        _sensorTypes = sensors.map((sensor) => sensor.sensorName).toList();
+        _selectedSensorType = _sensorTypes.isNotEmpty ? _sensorTypes.first : '';
+
+        if (sensors.isNotEmpty) {
+          _listParameter = sensors.first.sensorParams
+              .map((param) => param.parameterName)
+              .toList();
+          _selectedParameter =
+              _listParameter.isNotEmpty ? _listParameter.first : '';
+        }
+      });
+    } catch (e) {
+      print('Error fetching sensors: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +124,8 @@ class _DashboardFilterDrawerState extends State<DashboardFilterDrawer> {
                     onOptionSelected: (options) {
                       debugPrint(options.toString());
                     },
-                    options: items,
+                    options: _listStationName,
+                    selectedOptions: _selectedStationName,
                     selectionType: SelectionType.multi,
                     chipConfig: const ChipConfig(wrapType: WrapType.wrap),
                     dropdownHeight: 300,
@@ -99,8 +139,8 @@ class _DashboardFilterDrawerState extends State<DashboardFilterDrawer> {
                   ),
                   DrawerDrop(
                       fieldTitle: 'Parameter Type*',
-                      val: _selectedParameterType,
-                      items: _listParameterType),
+                      val: _selectedSensorType,
+                      items: _sensorTypes),
                   DrawerDrop(
                       fieldTitle: 'Parameter',
                       val: _selectedParameter,

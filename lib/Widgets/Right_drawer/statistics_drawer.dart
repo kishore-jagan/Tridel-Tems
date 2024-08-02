@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:multi_dropdown/multiselect_dropdown.dart';
-import 'package:temskishore/Widgets/Right_drawer/Widget/drawer_text.dart';
 
+import '../../Api Services/getAllSensors_Params_service.dart';
+import '../../Api Services/getAllStations_service.dart';
+import '../../model/Api_models/getAllSensors_Params_model.dart';
+import '../../model/Api_models/getAllStations_model.dart';
+import 'Widget/drawer_text.dart';
 import 'Widget/drawer_tick.dart';
 
 class StatisticsFilterDrawer extends StatefulWidget {
@@ -16,26 +20,6 @@ class StatisticsFilterDrawer extends StatefulWidget {
 class _StatisticsFilterDrawerState extends State<StatisticsFilterDrawer> {
   final MultiSelectController _stationController = MultiSelectController();
   final MultiSelectController _parameterController = MultiSelectController();
-
-  List<ValueItem> items = [
-    const ValueItem(label: 'WQ 1', value: '1'),
-    const ValueItem(label: 'WQ 2', value: '2'),
-  ];
-
-  List<ValueItem> parameterItems = [
-    const ValueItem(label: 'Water Temperature', value: '1'),
-    const ValueItem(label: 'Specific Conductance', value: '2'),
-    const ValueItem(label: 'Salinity', value: '3'),
-    const ValueItem(label: 'pH', value: '4'),
-    const ValueItem(label: 'Dissolved Oxygen Saturation', value: '5'),
-    const ValueItem(label: 'Turbidity', value: '6'),
-    // const ValueItem(label: 'Dissolved Oxygen', value: '8'),
-    // const ValueItem(label: 'tds', value: '9'),
-    // const ValueItem(label: 'Chlorophyll', value: '10'),
-    // const ValueItem(label: 'Depth', value: '11'),
-    // const ValueItem(label: 'Oxidation Reduction Potential', value: '12'),
-    // const ValueItem(label: 'External Voltage', value: '13'),
-  ];
 
   DateTime? _startDate;
   DateTime? _endDate;
@@ -66,6 +50,50 @@ class _StatisticsFilterDrawerState extends State<StatisticsFilterDrawer> {
       setState(() {
         _endDate = pickedDate;
       });
+    }
+  }
+
+  List<ValueItem> stationName = [];
+  List<ValueItem> parameterName = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchStations();
+    _fetchSensors();
+  }
+
+  _fetchStations() async {
+    try {
+      // Fetch stations using GetAllStationsService
+      List<Station> stations = await GetAllStationsService().getAllStations();
+
+      // Populate items with fetched stations
+      setState(() {
+        stationName = stations
+            .map((station) => ValueItem(
+                label: station.stationName,
+                value: station.stationId.toString()))
+            .toList();
+      });
+    } catch (e) {
+      print('Error fetching stations: $e');
+    }
+  }
+
+  _fetchSensors() async {
+    try {
+      List<Sensor> sensors = await GetAllSensorsService().getAllSensors();
+
+      setState(() {
+        parameterName = sensors.first.sensorParams
+            .map((sensor) => ValueItem(
+                label: sensor.parameterName,
+                value: sensor.sensorParamId.toString()))
+            .toList();
+      });
+    } catch (e) {
+      print('Error fetching sensors: $e');
     }
   }
 
@@ -117,7 +145,7 @@ class _StatisticsFilterDrawerState extends State<StatisticsFilterDrawer> {
                     onOptionSelected: (options) {
                       debugPrint(options.toString());
                     },
-                    options: items,
+                    options: stationName,
                     selectionType: SelectionType.multi,
                     chipConfig: const ChipConfig(wrapType: WrapType.wrap),
                     dropdownHeight: 300,
@@ -164,7 +192,7 @@ class _StatisticsFilterDrawerState extends State<StatisticsFilterDrawer> {
                     onOptionSelected: (options) {
                       debugPrint(options.toString());
                     },
-                    options: parameterItems,
+                    options: parameterName,
                     selectionType: SelectionType.multi,
                     chipConfig: const ChipConfig(wrapType: WrapType.wrap),
                     dropdownHeight: 300,

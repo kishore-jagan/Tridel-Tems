@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:temskishore/Utils/string.dart';
-import 'package:temskishore/controller/Drawer_Controller/drawer_controller.dart';
 
+import '../../Api Services/getAllStations_service.dart';
+import '../../Utils/string.dart';
 import '../../Widgets/Appbar/appbar.dart';
 import '../../Widgets/Left_drawer/drawer_left.dart';
 import '../../Widgets/Right_drawer/Widget/float_button.dart';
+import '../../controller/Drawer_Controller/drawer_controller.dart';
+import '../../model/Api_models/getAllStations_model.dart';
 import '../Homepage/homepage.dart';
 import 'Widget/buoy_watch_circle.dart';
 import 'Widget/dash_drop.dart';
@@ -32,8 +32,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
   void initState() {
     super.initState();
     getDate();
-    // _fetchStations();
-    // _fetchBearerToken();
+    _fetchStations();
   }
 
   void getDate() {
@@ -42,9 +41,6 @@ class _DashBoardPageState extends State<DashBoardPage> {
       lastupdated = todayDate;
     });
   }
-
-  final String _wqselectedItem = 'WQ 1';
-  final List<String> _wqItems = ['WQ 1', 'WQ 2'];
 
   List<dynamic> dataValue = [
     {
@@ -100,17 +96,25 @@ class _DashBoardPageState extends State<DashBoardPage> {
     },
   ];
 
-  // final base_url = 'http://apitems.homeunix.com:8090';
-  // late String _bearerToken;
-  // List<dynamic> _stations = [];
-  // List<String> _selectedStations = [];
+  String _selectedStationName = '';
+  List<String> _liststationName = [];
 
-  // Future<void> _fetchBearerToken() async {
-  //   final url = 'http://apitems.homeunix.com:8090/api/auth/login';
-  //   final response = await http.po
-  // }
+  _fetchStations() async {
+    try {
+      // Fetch stations using GetAllStationsService
+      List<Station> stations = await GetAllStationsService().getAllStations();
 
-  // Future<void> _fetchStations() async {}
+      // Populate items with fetched stations
+      setState(() {
+        _liststationName =
+            stations.map((station) => station.stationName).toList();
+        _selectedStationName =
+            _liststationName.isNotEmpty ? _liststationName.first : '';
+      });
+    } catch (e) {
+      print('Error fetching stations: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -191,7 +195,8 @@ class _DashBoardPageState extends State<DashBoardPage> {
                         children: [
                           Flexible(
                               child: DashBoardDrop(
-                                  val: _wqselectedItem, items: _wqItems)),
+                                  val: _selectedStationName,
+                                  items: _liststationName)),
                           const SizedBox(
                             width: 10,
                           ),

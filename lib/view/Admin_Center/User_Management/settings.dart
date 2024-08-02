@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:temskishore/view/Admin_Center/User_Management/Tabs/customrole_management.dart';
-import 'package:temskishore/view/Admin_Center/User_Management/Tabs/user_management.dart';
 
 import '../../../Widgets/Appbar/appbar.dart';
 import '../../../Widgets/Left_drawer/drawer_left.dart';
 import '../../Homepage/homepage.dart';
+import 'Tabs/customrole_management.dart';
+import 'Tabs/user_management.dart';
 
 class Settings extends StatefulWidget {
   const Settings({super.key});

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:get/get.dart';
 
+import '../../../Api Services/Api_Config/apiData.dart';
 import '../../../controller/map_style/map_controller.dart';
-import '../../../model/Map/latlng_model.dart';
 
 class ExpandBuoyCircle extends StatefulWidget {
   const ExpandBuoyCircle({super.key});
@@ -22,7 +22,7 @@ class _ExpandBuoyCircleState extends State<ExpandBuoyCircle> {
           children: [
             FlutterMap(
               options: MapOptions(
-                center: RoutePoints().routepoints[0],
+                center: ApiData.routepoints[0],
                 zoom: 9,
               ),
               children: [
@@ -33,43 +33,30 @@ class _ExpandBuoyCircleState extends State<ExpandBuoyCircle> {
                 ),
                 MarkerLayer(
                   markers: [
-                    Marker(
-                      point: RoutePoints().routepoints[0],
-                      builder: (ctx) => InkWell(
-                        child: Image.asset(
-                          isActive[0]
-                              ? 'assets/image/onlinebuoy.png'
-                              : 'assets/image/offlinebuoy.png',
-                          width: 40,
-                          height: 40,
+                    for (int i = 0; i < ApiData.routepoints.length; i++)
+                      Marker(
+                        point: ApiData.routepoints[iOSHorizontalOffset],
+                        builder: (ctx) => InkWell(
+                          child: Image.asset(
+                            'assets/image/onlinebuoy.png',
+                            width: 40,
+                            height: 40,
+                          ),
                         ),
                       ),
-                    ),
-                    Marker(
-                      point: RoutePoints().routepoints[1],
-                      builder: (ctx) => InkWell(
-                        child: Image.asset(
-                          isActive[1]
-                              ? 'assets/image/onlinebuoy.png'
-                              : 'assets/image/offlinebuoy.png',
-                          width: 40,
-                          height: 40,
-                        ),
-                      ),
-                    ),
                   ],
                 ),
                 CircleLayer(
                   circles: [
                     CircleMarker(
-                      point: RoutePoints().routepoints[0],
+                      point: ApiData.routepoints[0],
                       radius: 25,
                       color: Colors.red.withOpacity(0.5),
                       borderColor: Colors.red,
                       borderStrokeWidth: 2,
                     ),
                     CircleMarker(
-                      point: RoutePoints().routepoints[0],
+                      point: ApiData.routepoints[0],
                       radius: 13.5,
                       color: Colors.yellow.withOpacity(0.5),
                       borderColor: Colors.yellow,

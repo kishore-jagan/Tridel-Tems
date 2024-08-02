@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-import 'package:temskishore/Utils/string.dart';
+
+import '../../../Utils/string.dart';
 
 class FloatButton extends StatefulWidget {
   const FloatButton({super.key});

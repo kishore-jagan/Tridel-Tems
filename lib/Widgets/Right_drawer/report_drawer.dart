@@ -3,8 +3,10 @@ import 'package:get/get.dart';
 // ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart';
 import 'package:multi_dropdown/multiselect_dropdown.dart';
-import 'package:temskishore/Widgets/Right_drawer/Widget/drawer_date.dart';
 
+import '../../Api Services/getAllStations_service.dart';
+import '../../model/Api_models/getAllStations_model.dart';
+import 'Widget/drawer_date.dart';
 import 'Widget/drawer_tick.dart';
 
 class ReportFilterDrawer extends StatefulWidget {
@@ -18,11 +20,6 @@ class _ReportFilterDrawerState extends State<ReportFilterDrawer> {
   final DrawerDate _drawerDate = Get.put(DrawerDate());
   final MultiSelectController _controller = MultiSelectController();
   final TextEditingController _weekController = TextEditingController();
-
-  List<ValueItem> items = [
-    const ValueItem(label: 'WQ 1', value: '1'),
-    const ValueItem(label: 'WQ 2', value: '2'),
-  ];
 
   String _selectedDateRange = 'Date Range';
   final List<String> _listDateRange = [
@@ -103,6 +100,27 @@ class _ReportFilterDrawerState extends State<ReportFilterDrawer> {
   void initState() {
     super.initState();
     yearDropDown();
+    _fetchStations();
+  }
+
+  List<ValueItem> items = [];
+
+  _fetchStations() async {
+    try {
+      // Fetch stations using GetAllStationsService
+      List<Station> stations = await GetAllStationsService().getAllStations();
+
+      // Populate items with fetched stations
+      setState(() {
+        items = stations
+            .map((station) => ValueItem(
+                label: station.stationName,
+                value: station.stationId.toString()))
+            .toList();
+      });
+    } catch (e) {
+      print('Error fetching stations: $e');
+    }
   }
 
   @override

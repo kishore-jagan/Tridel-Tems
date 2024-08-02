@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:multi_dropdown/multiselect_dropdown.dart';
-import 'package:temskishore/view/Admin_Center/User_Management/Widgets/usermanagement_pwd.dart';
-import 'package:temskishore/view/Admin_Center/User_Management/Widgets/usermanagement_text.dart';
-import 'package:temskishore/view/Admin_Center/User_Management/Widgets/usermanagement_tick.dart';
-import 'package:temskishore/view/Admin_Center/User_Management/Widgets/usermanagemnet_drop.dart';
+
+import '../Widgets/usermanagement_pwd.dart';
+import '../Widgets/usermanagement_text.dart';
+import '../Widgets/usermanagement_tick.dart';
+import '../Widgets/usermanagemnet_drop.dart';
 
 class UserManagementTab extends StatefulWidget {
   const UserManagementTab({super.key});

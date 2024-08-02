@@ -2,9 +2,9 @@ import 'package:get/get.dart';
 
 import '../../model/Reports/reports_table_model.dart';
 
-class ReportTableControlller extends GetxController{
+class ReportTableControlller extends GetxController {
   final List<ReportTableModel> ReportTableModelList = [
-     ReportTableModel(
+    ReportTableModel(
         stationName: 'WQ1',
         date: '22/02/2024',
         time: '23:50:00',

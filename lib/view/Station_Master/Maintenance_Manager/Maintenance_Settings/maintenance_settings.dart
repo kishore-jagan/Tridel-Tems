@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:temskishore/view/Station_Master/Maintenance_Manager/Maintenance_Settings/Tabs/configurations_tab.dart';
-import 'package:temskishore/view/Station_Master/Maintenance_Manager/Maintenance_Settings/Tabs/manpower_tab.dart';
-import 'package:temskishore/view/Station_Master/Maintenance_Manager/Maintenance_Settings/Tabs/physical_inspection_tab.dart';
-import 'package:temskishore/view/Station_Master/Maintenance_Manager/Maintenance_Settings/Tabs/standard_procedure_tab.dart';
 
 import '../../../../Widgets/Appbar/appbar.dart';
 import '../../../../Widgets/Left_drawer/drawer_left.dart';
 import '../../../../Widgets/Right_drawer/Widget/float_button.dart';
 import '../../../../Widgets/Right_drawer/drawer_right.dart';
 import '../../../Homepage/homepage.dart';
+import 'Tabs/configurations_tab.dart';
+import 'Tabs/manpower_tab.dart';
+import 'Tabs/physical_inspection_tab.dart';
+import 'Tabs/standard_procedure_tab.dart';
 
 class MaintenanceSettingsPage extends StatefulWidget {
   const MaintenanceSettingsPage({super.key});

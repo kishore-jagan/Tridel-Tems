@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:multi_dropdown/multiselect_dropdown.dart';
-import 'package:temskishore/Widgets/Right_drawer/Widget/drawer_tick.dart';
+
+import 'Widget/drawer_tick.dart';
 
 class DataUploadDrawer extends StatefulWidget {
   const DataUploadDrawer({super.key});

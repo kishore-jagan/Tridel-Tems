@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:temskishore/model/Statistics/linechart_model.dart';
-import 'package:temskishore/view/Statistics/widgets/chart_widget.dart';
-import 'package:temskishore/view/Statistics/widgets/emptydata.dart';
-import 'package:temskishore/view/Statistics/widgets/sampledata.dart';
+
+import '../../../model/Statistics/linechart_model.dart';
+import 'chart_widget.dart';
+import 'emptydata.dart';
+import 'sampledata.dart';
 
 class LineChartView extends StatefulWidget {
   const LineChartView({super.key});
@@ -15,8 +16,8 @@ class LineChartView extends StatefulWidget {
 
 class _LineChartViewState extends State<LineChartView> {
   final ChartWidget _chartWidget = Get.put(ChartWidget());
-  final EmptyData _emptyData = Get.put(EmptyData());
-  final SampleData _sampleData = Get.put(SampleData());
+  // final EmptyData _emptyData = Get.put(EmptyData());
+  final ApiChartData _apiChartData = Get.put(ApiChartData());
 
   bool isDataEmpty = false;
 
@@ -30,17 +31,16 @@ class _LineChartViewState extends State<LineChartView> {
       title: _chartWidget.title,
       legend: Legend(isVisible: true),
       series: <CartesianSeries>[
-        ScatterSeries<ChartDataModel, int>(
+        ScatterSeries<ChartDataModel, DateTime>(
             legendItemText: 'C',
-            dataSource:
-                isDataEmpty ? _emptyData.emptyChart1 : _sampleData.chartData1,
+            dataSource: _apiChartData.chartData,
             xValueMapper: (ChartDataModel data, _) => data.x,
             yValueMapper: (ChartDataModel data, _) => data.y),
-        ScatterSeries<ChartDataModel, int>(
-            dataSource:
-                isDataEmpty ? _emptyData.emptyChart1 : _sampleData.chartData2,
-            xValueMapper: (ChartDataModel data, _) => data.x,
-            yValueMapper: (ChartDataModel data, _) => data.y),
+        // ScatterSeries<ChartDataModel, int>(
+        //     dataSource:
+        //         isDataEmpty ? _emptyData.emptyChart1 : _sampleData.chartData2,
+        //     xValueMapper: (ChartDataModel data, _) => data.x,
+        //     yValueMapper: (ChartDataModel data, _) => data.y),
       ],
     );
   }

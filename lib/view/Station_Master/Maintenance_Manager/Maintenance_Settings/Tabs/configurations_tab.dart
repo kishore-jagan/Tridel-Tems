@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:temskishore/view/Station_Master/Maintenance_Manager/Maintenance_Settings/Widgets/maintenance_datetime.dart';
-import 'package:temskishore/view/Station_Master/Maintenance_Manager/Maintenance_Settings/Widgets/maintenance_drop.dart';
-import 'package:temskishore/view/Station_Master/Maintenance_Manager/Maintenance_Settings/Widgets/maintenance_tabtick.dart';
-import 'package:temskishore/view/Station_Master/Maintenance_Manager/Maintenance_Settings/Widgets/maintenance_text.dart';
+
+import '../Widgets/maintenance_datetime.dart';
+import '../Widgets/maintenance_drop.dart';
+import '../Widgets/maintenance_tabtick.dart';
+import '../Widgets/maintenance_text.dart';
 
 class ConfigurationsTab extends StatefulWidget {
   const ConfigurationsTab({super.key});

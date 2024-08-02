@@ -1,6 +1,13 @@
+// class ChartDataModel {
+//   ChartDataModel(this.x, this.y, this.size);
+//   final int x;
+//   final double y;
+//   final double size;
+// }
+
 class ChartDataModel {
-  ChartDataModel(this.x, this.y, this.size);
-  final int x;
+  final DateTime x;
   final double y;
-  final double size;
+
+  ChartDataModel(this.x, this.y);
 }
